@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vehicles - Vehicle Rental System</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <h1>🚗 Vehicle Rental</h1>
+      <span class="inr-badge">🇮🇳 INR (₹)</span>
+    </div>
+    <nav>
+      <a href="index.html"><span class="icon">📊</span> Dashboard</a>
+      <a href="vehicles.html" class="active"><span class="icon">🚘</span> Vehicles</a>
+      <a href="customers.html"><span class="icon">👥</span> Customers</a>
+      <a href="bookings.html"><span class="icon">📋</span> Bookings</a>
+    </nav>
+    <div class="sidebar-footer">
+      Vehicle Rental System &copy; 2026
+    </div>
+  </aside>
+
+  <!-- Page Content -->
+  <div class="page-wrapper">
+    <header class="topbar">
+      <h2>🚘 Vehicle Management</h2>
+      <div class="topbar-right">
+        <span class="time-chip" id="clock">--:--:--</span>
+      </div>
+    </header>
+
+    <main class="content">
+      <div class="page-header">
+        <h2>Vehicles Catalog</h2>
+        <button class="btn btn-primary" onclick="openAdd()">➕ Add Vehicle</button>
+      </div>
+
+      <!-- Add / Edit Form Modal/Card -->
+      <div class="card" id="vehicle-form-section" style="display: none;">
+        <div class="card-header" id="form-title">➕ Add New Vehicle</div>
+        <div class="card-body">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Vehicle Name *</label>
+              <input type="text" id="v-name" placeholder="e.g. Hyundai Creta" />
+            </div>
+            <div class="form-group">
+              <label>Vehicle Type *</label>
+              <select id="v-type">
+                <option value="">— Select Type —</option>
+                <option value="Car">Car</option>
+                <option value="Bike">Bike</option>
+                <option value="Scooter">Scooter</option>
+                <option value="SUV">SUV</option>
+                <option value="Van">Van</option>
+                <option value="Auto">Auto</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Model *</label>
+              <input type="text" id="v-model" placeholder="e.g. 2024" />
+            </div>
+            <div class="form-group">
+              <label>Number Plate *</label>
+              <input type="text" id="v-plate" placeholder="e.g. AP09AB1234" />
+            </div>
+            <div class="form-group">
+              <label>Price Per Day (₹ INR) *</label>
+              <input type="number" id="v-price" class="inr-field" placeholder="e.g. 2000" min="1" />
+            </div>
+            <div class="form-group">
+              <label>Status</label>
+              <select id="v-status">
+                <option value="AVAILABLE">AVAILABLE</option>
+                <option value="RENTED">RENTED</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button class="btn btn-primary" onclick="saveVehicle()">💾 Save</button>
+            <button class="btn btn-warning" onclick="closeForm()">✖ Cancel</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Search & Filters -->
+      <div class="card" style="margin-bottom: 16px;">
+        <div class="card-body" style="padding: 16px;">
+          <div class="form-grid" style="grid-template-columns: 2fr 1fr 1fr;">
+            <div class="form-group">
+              <input type="text" id="search-input" placeholder="🔍 Search vehicle name, model, number plate..." oninput="filterVehicles()" />
+            </div>
+            <div class="form-group">
+              <select id="filter-type" onchange="filterVehicles()">
+                <option value="">All Types</option>
+                <option value="Car">Car</option>
+                <option value="Bike">Bike</option>
+                <option value="Scooter">Scooter</option>
+                <option value="SUV">SUV</option>
+                <option value="Van">Van</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <select id="filter-status" onchange="filterVehicles()">
+                <option value="">All Statuses</option>
+                <option value="AVAILABLE">AVAILABLE</option>
+                <option value="RENTED">RENTED</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Vehicles Table -->
+      <div class="card">
+        <div class="card-body table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Model</th>
+                <th>Plate</th>
+                <th>₹ Price / Day</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="vehicles-tbody">
+              <tr><td colspan="8" class="state-msg"><div class="loading-spinner"></div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div id="toast"></div>
+
+  <script src="js/api.js"></script>
+  <script src="js/vehicles.js"></script>
+</body>
+</html>

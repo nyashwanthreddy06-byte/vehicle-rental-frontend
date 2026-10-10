@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard - Vehicle Rental System</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <h1>🚗 Vehicle Rental</h1>
+      <span class="inr-badge">🇮🇳 INR (₹)</span>
+    </div>
+    <nav>
+      <a href="index.html" class="active"><span class="icon">📊</span> Dashboard</a>
+      <a href="vehicles.html"><span class="icon">🚘</span> Vehicles</a>
+      <a href="customers.html"><span class="icon">👥</span> Customers</a>
+      <a href="bookings.html"><span class="icon">📋</span> Bookings</a>
+    </nav>
+    <div class="sidebar-footer">
+      Vehicle Rental System &copy; 2026
+    </div>
+  </aside>
+
+  <!-- Page Content -->
+  <div class="page-wrapper">
+    <header class="topbar">
+      <h2>📊 Dashboard Overview</h2>
+      <div class="topbar-right">
+        <span class="time-chip" id="clock">--:--:--</span>
+      </div>
+    </header>
+
+    <main class="content">
+      <div class="page-header">
+        <h2>System Summary</h2>
+        <button class="btn btn-primary btn-sm" onclick="loadDashboard()">🔄 Refresh</button>
+      </div>
+
+      <!-- Stats Row -->
+      <div class="stats-row">
+        <div class="stat-card" data-icon="🚘">
+          <div class="stat-value" id="stat-vehicles">—</div>
+          <div class="stat-label">Total Vehicles</div>
+        </div>
+        <div class="stat-card success" data-icon="✅">
+          <div class="stat-value" id="stat-available">—</div>
+          <div class="stat-label">Available</div>
+        </div>
+        <div class="stat-card accent" data-icon="🔑">
+          <div class="stat-value" id="stat-rented">—</div>
+          <div class="stat-label">Rented</div>
+        </div>
+        <div class="stat-card info" data-icon="👥">
+          <div class="stat-value" id="stat-customers">—</div>
+          <div class="stat-label">Customers</div>
+        </div>
+        <div class="stat-card warning" data-icon="📋">
+          <div class="stat-value" id="stat-bookings">—</div>
+          <div class="stat-label">Bookings</div>
+        </div>
+        <div class="stat-card success" data-icon="₹">
+          <div class="stat-value price" id="stat-revenue">—</div>
+          <div class="stat-label">Revenue (INR)</div>
+        </div>
+      </div>
+
+      <!-- Recent Vehicles -->
+      <div class="card">
+        <div class="card-header">🚘 Recently Added Vehicles</div>
+        <div class="card-body table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Vehicle Name</th>
+                <th>Type</th>
+                <th>Model</th>
+                <th>Plate Number</th>
+                <th>₹ Price / Day</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="dash-vehicles">
+              <tr><td colspan="6" class="state-msg"><div class="loading-spinner"></div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Recent Bookings -->
+      <div class="card">
+        <div class="card-header">📋 Recent Bookings</div>
+        <div class="card-body table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Customer</th>
+                <th>Vehicle</th>
+                <th>Duration</th>
+                <th>₹ Total Cost</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="dash-bookings">
+              <tr><td colspan="5" class="state-msg"><div class="loading-spinner"></div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div id="toast"></div>
+
+  <script src="js/api.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

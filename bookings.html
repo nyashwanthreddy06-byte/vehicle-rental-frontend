@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bookings - Vehicle Rental System</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <h1>🚗 Vehicle Rental</h1>
+      <span class="inr-badge">🇮🇳 INR (₹)</span>
+    </div>
+    <nav>
+      <a href="index.html"><span class="icon">📊</span> Dashboard</a>
+      <a href="vehicles.html"><span class="icon">🚘</span> Vehicles</a>
+      <a href="customers.html"><span class="icon">👥</span> Customers</a>
+      <a href="bookings.html" class="active"><span class="icon">📋</span> Bookings</a>
+    </nav>
+    <div class="sidebar-footer">
+      Vehicle Rental System &copy; 2026
+    </div>
+  </aside>
+
+  <!-- Page Content -->
+  <div class="page-wrapper">
+    <header class="topbar">
+      <h2>📋 Booking Management</h2>
+      <div class="topbar-right">
+        <span class="time-chip" id="clock">--:--:--</span>
+      </div>
+    </header>
+
+    <main class="content">
+      <div class="page-header">
+        <h2>Vehicle Reservations</h2>
+      </div>
+
+      <!-- New Booking Form Card -->
+      <div class="card">
+        <div class="card-header">➕ Create New Booking</div>
+        <div class="card-body">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Select Customer *</label>
+              <select id="b-customer">
+                <option value="">— Select Customer —</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Select Vehicle (Available Only) *</label>
+              <select id="b-vehicle" onchange="updatePricePreview()">
+                <option value="">— Select Vehicle —</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Start Date *</label>
+              <input type="date" id="b-start" onchange="updatePricePreview()" />
+            </div>
+            <div class="form-group">
+              <label>End Date *</label>
+              <input type="date" id="b-end" onchange="updatePricePreview()" />
+            </div>
+          </div>
+
+          <!-- Price Preview -->
+          <div id="price-preview" class="price-preview" style="display: none;">
+            <span class="preview-label">Estimated Price in INR:</span>
+            <span id="preview-days" style="color: #444; font-weight: 600;"></span>
+            <span id="preview-total" class="preview-total"></span>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn btn-success" onclick="createBooking()">✅ Confirm Booking</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bookings Table -->
+      <div class="card">
+        <div class="card-header">📋 All Bookings History</div>
+        <div class="card-body table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Customer</th>
+                <th>Vehicle</th>
+                <th>Plate Number</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Days</th>
+                <th>₹ Total (INR)</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="bookings-tbody">
+              <tr><td colspan="10" class="state-msg"><div class="loading-spinner"></div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div id="toast"></div>
+
+  <script src="js/api.js"></script>
+  <script src="js/bookings.js"></script>
+</body>
+</html>
